@@ -1,16 +1,57 @@
 package TreeAlgo;
 
+import java.util.Stack;
+
 public class TreeTraversals_iterative {
     private void postOrder(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<>();
+        Stack<Integer> values = new Stack<>();
 
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            values.push(stack.peek().data);
+            TreeNode node = stack.pop();
+
+            if (node.left != null) {
+                stack.push(node.left);
+            }
+            if (node.right != null) {
+                stack.push(node.right);
+            }
+        }
+        while (!values.isEmpty()) {
+            System.out.print(values.pop() + "  ");
+        }
     }
 
     private void preOrder(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<>();
 
+        while (root != null || !stack.isEmpty()) {
+            while (root != null) {
+                System.out.print(root.data + "  ");
+                stack.push(root);
+                root = root.left;
+            }
+            root = stack.pop().right;
+        }
     }
 
+    // Useful in solving problems like
+    // https://leetcode.com/problems/validate-binary-search-tree
     private void inOrder(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<>();
 
+        while (root != null || !stack.isEmpty()) {
+            while (root != null) {
+                stack.push(root);
+                root = root.left;
+            }
+
+            TreeNode cur = stack.pop();
+            System.out.print(cur.data + "  ");
+            root = cur.right;
+        }
     }
 
     public static void main(String[] args) {
