@@ -1,52 +1,44 @@
 package TreeAlgo;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class TreeTraversals_recursive {
-    private void inOrder(TreeNode treeNode) {
+    public List<Integer> inOrder(TreeNode treeNode) {
+        List<Integer> res = new LinkedList<>();
+        inOrderHelper(treeNode, res);
+        return res;
+    }
+    private void inOrderHelper(TreeNode treeNode, List<Integer> res) {
         if (treeNode == null) return;
-        inOrder(treeNode.left);
-        System.out.print(treeNode.data + "  ");
-        inOrder(treeNode.right);
+        inOrderHelper(treeNode.left, res);
+        res.add(treeNode.data);
+        inOrderHelper(treeNode.right, res);
     }
 
-    private void preOrder(TreeNode treeNode) {
-        if (treeNode == null) return;
-        System.out.print(treeNode.data + "  ");
-        preOrder(treeNode.left);
-        preOrder(treeNode.right);
+    public List<Integer> preOrder(TreeNode treeNode) {
+        List<Integer> res = new LinkedList<>();
+        preOrderHelper(treeNode, res);
+        return res;
     }
 
-    private void postOrder(TreeNode treeNode) {
+    private void preOrderHelper(TreeNode treeNode, List<Integer> res) {
         if (treeNode == null) return;
-        postOrder(treeNode.left);
-        postOrder(treeNode.right);
-        System.out.print(treeNode.data + "  ");
+        res.add(treeNode.data);
+        preOrderHelper(treeNode.left, res);
+        preOrderHelper(treeNode.right, res);
     }
 
-    public static void main(String[] args) {
-        // Create a tree
-        //                     40
-        //                   /    \
-        //                 20     50
-        //               /   \      \
-        //             10    30     60
-        //            /
-        //          5
-        TreeNode root = new TreeNode(40);
-        TreeNode node20 = root.addLeftChild(20);
-        TreeNode node50 = root.addRightChild(50);
-        TreeNode node10 = node20.addLeftChild(10);
-        node20.addRightChild(30);
-        node10.addLeftChild(5);
-        node50.addRightChild(60);
+    public List<Integer> postOrder(TreeNode treeNode) {
+        List<Integer> res = new LinkedList<>();
+        postOrderHelper(treeNode, res);
+        return res;
+    }
 
-        TreeTraversals_recursive obj = new TreeTraversals_recursive();
-        System.out.println("In order");
-        obj.inOrder(root);
-        System.out.println();
-        System.out.println("Pre order");
-        obj.preOrder(root);
-        System.out.println();
-        System.out.println("Post order");
-        obj.postOrder(root);
+    private void postOrderHelper(TreeNode treeNode, List<Integer> res) {
+        if (treeNode == null) return;
+        postOrderHelper(treeNode.left, res);
+        postOrderHelper(treeNode.right, res);
+        res.add(treeNode.data);
     }
 }
