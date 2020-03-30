@@ -10,25 +10,6 @@ public class BFS {
         System.out.print(node + "  ");
     }
 
-    void bfs(int[][] graph) {
-        int noOfNodes = graph.length;
-        boolean[] visited = new boolean[noOfNodes];
-
-        for (int i = 0; i < noOfNodes; i++) {
-            if (!visited[i]) {
-                visited[i] = true;
-                processNode(i);
-                // Visit all neighbors of i
-                for (int j = 0; j < noOfNodes; j++) {
-                    if (graph[i][j] == 1 && !visited[j]) {
-                        visited[j] = true;
-                        processNode(j);
-                    }
-                }
-            }
-        }
-    }
-
     void bfs(List<List<Integer>> graph) {
         List<Integer> visited = new ArrayList<>();
         Queue<Integer> queue = new LinkedList<>();

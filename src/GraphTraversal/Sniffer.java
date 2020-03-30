@@ -27,8 +27,6 @@ public class Sniffer {
 
         System.out.println("BFS");
         BFS bfs = new BFS();
-        bfs.bfs(graph);
-        System.out.println();
         bfs.bfs(graphAdjList);
         System.out.println();
         System.out.println("DFS");
